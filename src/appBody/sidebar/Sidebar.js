@@ -1,7 +1,13 @@
 import { Avatar } from "@material-ui/core";
 import React from "react";
 import "./Sidebar.css";
+import {useDispatch, useSelector} from 'react-redux'
+import { selectUser } from "../../features/userSlice";
 const Sidebar = () => {
+
+  const dispatch = useDispatch();
+  const user = useSelector(selectUser);
+
   const recentItem = (topic) => (
     <div className="sidebar__recentItem">
       <span className="sidebar__hash">#</span>
@@ -17,9 +23,9 @@ const Sidebar = () => {
           src="https://images.unsplash.com/photo-1596774473906-6bb2700812aa?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1534&q=80"
           alt=""
         />
-        <Avatar className="sidebar__avatar" />
-        <h2>Utkarsh Tiwari</h2>
-        <h4>System engineer at Infosys</h4>
+        <Avatar src={user.photoUrl} className="sidebar__avatar" >{user.email[0].toUpperCase()}</Avatar>
+        <h2>{user.displayName}</h2>
+        <h4>{user.email}</h4>
       </div>
 
       <div className="sidebar__stats">
